@@ -1,4 +1,4 @@
-package com.devsuperior.myfirstproject.entities;
+package com.devsuperior.myfirstproject.domain;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -11,9 +11,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
+
 public class Product implements Serializable{
 
 	private static final long serialVersionUID = 1L;
+
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -69,6 +71,10 @@ public class Product implements Serializable{
 		this.category = category;
 	}
 
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -85,6 +91,16 @@ public class Product implements Serializable{
 		Product other = (Product) obj;
 		return Objects.equals(id, other.id);
 	}
+
+	@Override
+	public String toString() {
+		return "Product [id=" + id + ", name=" + name + ", price=" + price + ", category=" + category + "]";
+	}
+
+	
+
+	
+	
 	
 	
 }

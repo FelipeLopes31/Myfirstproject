@@ -1,4 +1,4 @@
-package com.devsuperior.myfirstproject.entities;
+package com.devsuperior.myfirstproject.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -16,23 +16,25 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class Category implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+
+	@Id 
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	private String name;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "category")
-	private List<Product> products = new ArrayList<>();
-	
+	private List<Product> product = new ArrayList<>();
+
 	public Category() {
+		super();
 	}
 
-	public Category(Long id, String name) {
+	public Category(Long id, String name, List<Product> product) {
 		super();
 		this.id = id;
 		this.name = name;
+		this.product = product;
 	}
 
 	public Long getId() {
@@ -51,16 +53,18 @@ public class Category implements Serializable {
 		this.name = name;
 	}
 
+	public List<Product> getProduct() {
+		return product;
+	}
+
+	public void setProduct(List<Product> product) {
+		this.product = product;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
 	}
-
-	
-	public List<Product> getProducts() {
-		return products;
-	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -73,6 +77,12 @@ public class Category implements Serializable {
 		Category other = (Category) obj;
 		return Objects.equals(id, other.id);
 	}
+
+	@Override
+	public String toString() {
+		return "Category [id=" + id + ", name=" + name + ", product=" + product + "]";
+	}
+
 	
 	
 }
